@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><title>Pensando en Arquitectura</title><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link href='big.css' rel='stylesheet' type='text/css'>
+<base target="_blank" />
+<script type='text/javascript' src="big.js"></script></head><body>
+
+<svg height="0" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter id="outline">
+            <feMorphology operator="dilate" in="SourceAlpha" radius="5" >
+            </feMorphology>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="breakup">
+            <feTurbulence result="TURBULENCE" baseFrequency=".05,.2" numOctaves="3" seed="1" />
+            <feDisplacementMap in="SourceGraphic" in2="TURBULENCE" scale="24" >
+                <animate attributeType="XML" attributeName="scale" from="16" to="32" dur="4s" repeatCount="indefinite"/>
+            </feDisplacementMap>
+        </filter>
+        <filter id="pixelate" x="0" y="0">
+            <feFlood x="4" y="4" height="2" width="2"/>
+            <feComposite width="10" height="10"/>
+            <feTile result="a"/>
+            <feComposite in="SourceGraphic" in2="a" operator="in"/>
+            <feMorphology operator="dilate" radius="5"/>
+        </filter>
+        <pattern id="hexapolka" patternUnits="userSpaceOnUse" width="100" height="86" patternTransform="scale(.1)">
+            <rect width="100%" height="86" fill="#f0f" />
+            <circle cx="0" cy="44" r="16" id="dot" fill="red" />
+            <use xlink:href="#dot" transform="translate(48,0)" />
+            <use xlink:href="#dot" transform="translate(25,-44)" />
+            <use xlink:href="#dot" transform="translate(75,-44)" />
+            <use xlink:href="#dot" transform="translate(100,0)" />
+            <use xlink:href="#dot" transform="translate(75,42)" />
+            <use xlink:href="#dot" transform="translate(25,42)" />
+        </pattern>
+        <filter id="eroded">
+          <feFlood flood-color="#FFFFFF" result="WHITE" />
+
+          <!-- Texture -->
+          <feTurbulence baseFrequency=".05,.3" type="fractalNoise" numOctaves="3" seed="1" result="NOISE" />
+          <feColorMatrix type="matrix"
+                values="0 0 0 0 0,
+                        0 0 0 0 0,
+                        0 0 0 0 0,
+                        0 0 0 -6.1 2.1" in="NOISE"  result="BWNOISE" />
+
+          <feColorMatrix type="matrix"
+                values="0 0 0 0 0,
+                        0 0 0 0 0,
+                        0 0 0 0 0,
+                        0 0 0 -1.7 1.8" in="NOISE" result="Texture_30" />
+          <!-- Texture -->
+
+          <!-- FILL -->
+          <feOffset dx="-3" dy="4" in="SourceAlpha" result="FILL_10" />
+          <feDisplacementMap scale="37" in="FILL_10" in2="NOISE" result="FILL_20" />
+          <feComposite operator="in" in="Texture_30" in2 = "FILL_20" result="FILL_40"/>
+          <feComposite operator="in" in="WHITE" in2="FILL_40" result="FILL_50" />
+          <!-- FILL END-->
+
+          <!-- OUTLINE -->
+          <feMorphology operator="dilate" radius="6" in="SourceAlpha" result="OUTLINE_10" />
+          <feComposite operator="xor" in="OUTLINE_10" in2 = "SourceAlpha" result="OUTLINE_20" />
+          <feDisplacementMap scale="7" in="OUTLINE_20" in2="NOISE" result="OUTLINE_30" />
+          <feComposite operator="arithmetic" k2="-1" k3="1" in="BWNOISE" in2="OUTLINE_30" result="OUTLINE_40" />
+          <!-- OUTLINE END-->
+
+          <feMerge  result="merge2">
+           <feMergeNode in="FILL_50" />
+           <feMergeNode in="OUTLINE_40" />
+          </feMerge>
+        </filter>
+      </defs>
+</svg>
+
+<!-- slides -->
+<div data-title="Vivir y Morir en Los Repos" class="superdrop centered"><img src="livediela2b.jpg"/>
+  <notes></notes>
+</div>
+<div data-title="Vivir y Morir en Los Repos" class="superdrop centered eroded"><img src="background.jpg"/>
+    Vivir y Morir en Los Repos
+  <notes></notes>
+</div>
+
+<div class="centered">
+    <a href="http://lpqf.net/codeco" target="_blank"><code class="orange straight">http://lpqf.net/codeco</code></a>
+</div>
+
+<div class="centered"> Kali Chip </div>
+<div class="centered"> Kali </div>
+<div class="centered"> Muerte y Destrucción </div>
+<div class="grey hand straight"> De buen rollo, claro </div>
+
+<div class="centered orange"> Muerte </div>
+<div class="centered lime straight"><code>rm -rf ./project</code></div>
+
+<div class="centered">
+  <notes></notes>
+</div>
+
+
+
+<div data-title="El Fin" class="sectiontitle">Gracias</div>
+<div data-title="El Fin" class="sectiontitle">Preguntas</div>
+<div data-title="El Fin" class="sectiontitle fire">Preguntas</div>
+<!-- end -->
+<span class="progress"><span id="progress"></span></span>
+<span class="time"><span id="time"></span></span>
+<span id="fonter"></span>
+</body></html>
